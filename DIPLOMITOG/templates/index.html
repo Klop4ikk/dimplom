@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный Поиск Книг — ИИ Гибрид</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/"><i class="bi bi-cpu-fill me-2"></i>BookAI Hybrid</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active fw-semibold me-3" href="/"><i class="bi bi-search me-1"></i>Умный поиск</a>
+                <a class="nav-link fw-semibold" href="/catalog"><i class="bi bi-grid-3x3-gap me-1"></i>Каталог книг</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-dark text-white text-center py-5 shadow-sm position-relative" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/static/images/hero-bg.jpg') center/cover;">
+    <div class="container py-3">
+        <h1 class="display-5 fw-bold">Интеллектуальная поисковая система</h1>
+        <p class="lead text-light opacity-75">Найди любую книгу по описанию сюжета, атмосфере или смутным воспоминаниям</p>
+    </div>
+</div>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                
+                <div class="search-container shadow-sm mb-5">
+                    <div class="input-group input-group-lg mb-4">
+                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" id="search-input" class="form-control border-start-0 fs-5" placeholder="Например: Студент убивает старуху топором и мучается...">
+                        <button class="btn btn-primary px-4 fw-bold" id="search-btn">Найти шедевр</button>
+                    </div>
+
+                    <div class="p-3 bg-light rounded-3 border mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="hybrid-slider" class="form-label fw-bold mb-0 text-secondary"><i class="bi bi-sliders me-2"></i>Баланс алгоритмов ранжирования:</label>
+                            <span id="slider-value" class="badge bg-dark fs-6 font-monospace">BERT: 50% | TF-IDF: 50%</span>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="1" step="0.05" value="0.5" id="hybrid-slider">
+                        <div class="slider-labels">
+                            <span><i class="bi bi-brain"></i> Глубокая семантика (BERT)</span>
+                            <span>Точные ключевые слова (TF-IDF) <i class="bi bi-fonts"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-outline-secondary btn-sm" id="random-btn"><i class="bi bi-dice-5 me-1"></i> Мне повезёт!</button>
+                    </div>
+                </div>
+
+                <div id="feedback-alert-zone" class="alert d-none text-center shadow-sm" role="alert"></div>
+
+                <div id="results-container">
+                    <div class="text-center text-muted py-5 card border-0 bg-white shadow-sm rounded-3">
+                        <i class="bi bi-book text-secondary opacity-25" style="font-size: 4rem;"></i>
+                        <p class="fs-5 mt-3">Результаты поиска появятся здесь</p>
+                    </div>
+                </div>
+
+                <div id="feedback-trigger-zone" class="text-center mt-4 d-none">
+                    <p class="text-muted mb-2">Не нашли то, что искали или выдача неверна?</p>
+                    <button class="btn btn-sm btn-link text-primary fw-semibold text-decoration-none" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                        <i class="bi bi-exclamation-circle me-1"></i> Сообщить, что в подборке нет нужной книги
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="feedbackModalLabel"><i class="bi bi-chat-square-heart me-2 text-primary"></i>Улучшить поиск</h5>
+                    <button type="button" class="btn-close" data-bs-toggle="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted style-sm">Наша нейросеть постоянно учится. Введите точное название книги, которую вы рассчитывали увидеть по вашему запросу:</p>
+                    <div class="mb-3">
+                        <label for="feedback-book-title" class="form-label fw-semibold">Название книги (и автора, если помните):</label>
+                        <input type="text" class="form-control" id="feedback-book-title" placeholder="Например: Гарри Поттер и Философский камень">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary fw-bold" id="submit-feedback-btn">Отправить и обучить ИИ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="randomBookModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-stars text-warning me-2"></i>Случайная книга из архива</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="randomBookModalBody">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" id="random-retry-btn" onclick="triggerRandomBook()"><i class="bi bi-arrow-clockwise me-1"></i> Крутить еще раз</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

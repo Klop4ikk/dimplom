@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог Библиотеки — Фильтрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/"><i class="bi bi-cpu-fill me-2"></i>BookAI Hybrid</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link fw-semibold me-3" href="/"><i class="bi bi-search me-1"></i>Умный поиск</a>
+                <a class="nav-link active fw-semibold" href="/catalog"><i class="bi bi-grid-3x3-gap me-1"></i>Каталог книг</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            
+            <div class="col-lg-3 mb-4">
+                <div class="card shadow-sm border-0 sticky-top" style="top: 20px; border-radius: 12px; overflow: hidden;">
+                    <div class="card-header bg-white py-3 border-bottom">
+                        <h5 class="mb-0 fw-bold text-dark"><i class="bi bi-filter-left me-2 text-primary"></i>Категории</h5>
+                    </div>
+                    <div class="list-group list-group-flush" id="subcategory-list">
+                        <a href="#" class="list-group-item list-group-item-action active fw-medium subcat-item" data-subcat="Все жанры">
+                            <i class="bi bi-bookmarks me-2"></i>Все жанры
+                        </a>
+                        
+                        <div class="genre-group-title">🚀 Фантастика и Фэнтези</div>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Отечественная фантастика">Отечественная фантастика</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Зарубежное фэнтези">Зарубежное фэнтези</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Отечественное фэнтези">Отечественное фэнтези</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Фантастический боевик">Фантастический боевик</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Ужасы">Ужасы</a>
+
+                        <div class="genre-group-title">🔍 Детективы</div>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Зарубежные детективы">Зарубежные детективы</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Отечественные детективы">Отечественные детективы</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Иронические детективы">Иронические детективы</a>
+
+                        <div class="genre-group-title">💖 Романы и Проза</div>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Зарубежные любовные романы">Зарубежные любовные романы</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Российские любовные романы">Российские любовные романы</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Исторические романы">Исторические романы</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Современная проза">Современная проза</a>
+                        <a href="#" class="list-group-item list-group-item-action fw-medium subcat-item ps-4" data-subcat="Классическая литература">Классическая литература</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                
+                <div class="card shadow-sm border-0 mb-4 p-3" style="border-radius: 12px;">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                                <input type="text" id="catalog-title-search" class="form-control border-start-0" placeholder="Поиск по названию книги...">
+                            </div>
+                        </div>
+                        <div class="col-md-4 position-relative">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-person"></i></span>
+                                <input type="text" id="catalog-author-input" class="form-control border-start-0" placeholder="Начните вводить автора..." autocomplete="off">
+                            </div>
+                            <div id="author-dropdown" class="list-group position-absolute w-100 shadow-sm d-none" style="z-index: 1050; max-height: 250px; overflow-y: auto; left: 0; padding: 0 12px;">
+                                <div class="list-group-inner bg-white border rounded"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-md-end text-center">
+                            <span class="badge bg-light text-dark border p-2 w-100" style="font-size: 0.9rem;">
+                                Найдено книг: <span id="total-books-count" class="fw-bold text-primary">0</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="border-top mt-3 pt-3">
+                        <div class="fw-semibold text-secondary mb-2" style="font-size: 0.85rem;"><i class="bi bi-tags-fill me-1"></i>Фильтр сюжета (выберите теги из базы данных):</div>
+                        <div class="d-flex flex-wrap gap-2" id="dynamic-themes-container" style="max-height: 150px; overflow-y: auto; padding-right: 5px;">
+                            </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold text-dark mb-0" id="catalog-title">Все книги фонда</h4>
+                </div>
+                
+                <div class="row" id="catalog-grid"></div>
+
+                <nav aria-label="Page navigation" class="mt-4" id="catalog-pagination"></nav>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

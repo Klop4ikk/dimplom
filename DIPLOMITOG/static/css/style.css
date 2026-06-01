@@ -1,0 +1,113 @@
+/* static/css/style.css */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+}
+
+.search-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    padding: 30px;
+    margin-top: -40px;
+}
+
+.book-card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: white;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1) !important;
+}
+
+.score-badge {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.theme-tag {
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+/* Стили для красивой группировки подкатегорий в меню */
+.genre-group-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #a0aec0;
+    font-weight: 700;
+    padding: 14px 16px 6px 16px;
+    background-color: #fcfdfd;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.subcat-item {
+    border: none !important;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.subcat-item:hover {
+    background-color: #f1f5f9 !important;
+    color: #3182ce !important;
+    padding-left: 28px !important; /* Легкий интерактивный сдвиг */
+}
+
+.subcat-item.active {
+    background-color: #ebf8ff !important;
+    color: #2b6cb0 !important;
+    font-weight: 600 !important;
+}
+/* Красивые овальные фильтры-баджи */
+.badge-tag-oval {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #f1f5f9; /* Нейтральный светло-серый фон */
+    color: #475569;            /* Серый цвет текста */
+    border-radius: 50px;       /* Идеально овальная форма штучки */
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease-in-out; /* Плавное переключение цвета */
+    border: 1px solid #cbd5e1;
+}
+
+/* Эффект при наведении курсора */
+.badge-tag-oval:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+    border-color: #94a3b8;
+}
+
+/* Стиль для ВЫБРАННОГО фильтра (активное состояние) */
+.badge-tag-oval.active {
+    background-color: #0d6efd !important; /* Насыщенный синий цвет Bootstrap */
+    color: #ffffff !important;            /* Белый текст */
+    border-color: #0a58ca !important;
+    box-shadow: 0 3px 8px rgba(13, 110, 253, 0.35); /* Мягкая синяя неоновая тень */
+    transform: translateY(-1px);          /* Легкий эффект нажатия вверх */
+}
